@@ -8,7 +8,7 @@ public class Bot
 {
     private DiscordClient _client;
     
-    public async Task StartBot(String token)
+    public async Task StartBot()
     {
         await _client.ConnectAsync();
         await Task.Delay(-1);
@@ -27,6 +27,6 @@ public class Bot
 
         _client.MessageCreated += MessageCreate.MessageCreateEvent;
         
-        StartBot(token).GetAwaiter().GetResult();
+        StartBot().GetAwaiter().GetResult();
     }
 }
