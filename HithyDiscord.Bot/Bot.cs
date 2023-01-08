@@ -10,6 +10,14 @@ public class Bot
     
     public async Task StartBot(String token)
     {
+        await _client.ConnectAsync();
+        await Task.Delay(-1);
+    }
+    
+    public Bot(String token, String[] supportChannels)
+    {
+        MessageCreate.SupportChannels = supportChannels;
+        
         _client = new DiscordClient(new DiscordConfiguration()
         {
             Token = token,
@@ -19,13 +27,6 @@ public class Bot
 
         _client.MessageCreated += MessageCreate.MessageCreateEvent;
         
-        await _client.ConnectAsync();
-        await Task.Delay(-1);
-    }
-    
-    public Bot(String token, String[] supportChannels)
-    {
-        MessageCreate.SupportChannels = supportChannels;
         StartBot(token).GetAwaiter().GetResult();
     }
 }
